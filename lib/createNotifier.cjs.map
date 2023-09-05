@@ -1,0 +1,1 @@
+{"version":3,"file":"createNotifier.cjs","sourceRoot":"","sources":["../src/createNotifier.cts"],"names":[],"mappings":"AACA,OAAO,EAAE,QAAQ,EAAE,MAAM,gBAAgB,CAAC;AAE1C,MAAM,CAAC,KAAK,UAAU,cAAc,CAClC,QAA0B;IAE1B,MAAM,QAAQ,GAAG,IAAI,QAAQ,CAAC,QAAQ,CAAC,CAAC;IACxC,MAAM,QAAQ,CAAC,aAAa,EAAE,CAAC;IAC/B,OAAO,QAAQ,CAAC;AAClB,CAAC"}
