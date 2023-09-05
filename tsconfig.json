@@ -5,9 +5,9 @@
         "lib": [
             "es2022"
         ],
-        "incremental": true,
         "declaration": true,
-        "module": "Node16",
+        "module": "es2022",
+        "moduleResolution": "node",
         "target": "es2022",
         "strict": true,
         "esModuleInterop": true,
