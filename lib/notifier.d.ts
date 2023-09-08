@@ -1,7 +1,7 @@
 import { Notification } from "./notification.js";
 import { NotifierSettings } from "./notifierSettings.js";
 export declare class Notifier {
-    private readonly _notifierPath;
+    static BinaryPath: string;
     private _process?;
     private _onReady?;
     private readonly _onReadyPromise;
@@ -15,6 +15,6 @@ export declare class Notifier {
     private _lastStatusMessageNumber;
     private _subscribeForEvents;
     close(): Promise<void>;
-    notify(xml: string): Promise<Notification>;
+    notifyRaw(xml: string): Promise<Notification>;
     remove(notification: Notification): Promise<void>;
 }

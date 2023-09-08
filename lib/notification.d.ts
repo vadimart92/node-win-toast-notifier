@@ -7,6 +7,6 @@ export declare class Notification {
     private _eventEmitter;
     constructor(_notifier: Notifier, id: string);
     statusChanged(statusMessage: StatusMessage): boolean;
-    on(event: StatusMessageType, listener: (...args: any[]) => void): void;
+    on(event: StatusMessageType, listener: (statusMessage: StatusMessage) => void): void;
     remove(): Promise<void>;
 }

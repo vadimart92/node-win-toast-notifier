@@ -1,12 +1,21 @@
 import { ChildProcessWithoutNullStreams, spawn } from "child_process";
-import { NotifierConfig } from "./notifierConfig.js";
 import { Notification } from "./notification.js";
 import { NotifierSettings } from "./notifierSettings.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import fetch, { HeadersInit } from "node-fetch";
 import { StatusMessage } from "./statusMessage.js";
-import { NotifyResponse } from "./notifyResponse.js";
+
+interface NotifierConfig {
+  application_id: string;
+  api_key: string;
+  ip: string;
+  port?: number;
+}
+
+interface NotifyResponse {
+  id: string
+}
 
 export class Notifier {
   public static BinaryPath: string =  path.resolve(
@@ -135,7 +144,7 @@ export class Notifier {
     this._process?.kill("SIGTERM");
   }
 
-  async notify(xml: string) {
+  async notifyRaw(xml: string) {
     let url = this._getUrl("notify");
     let config = {
       method: "POST",

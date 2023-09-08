@@ -1,4 +1,5 @@
 import { createNotifier } from "./createNotifier";
+
 export default createNotifier;
 export * from './notifierSettings';
 export * from './statusMessage';
