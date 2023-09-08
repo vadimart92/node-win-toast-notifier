@@ -1,6 +1,4 @@
-import { createNotifier } from "./createNotifier";
-
-export default createNotifier;
+export * from "./createNotifier";
 export * from './notifierSettings';
 export * from './statusMessage';
 export * from './statusMessageType';
