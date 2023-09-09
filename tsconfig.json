@@ -3,11 +3,11 @@
     "display": "Node 18",
     "compilerOptions": {
         "lib": [
-            "es2022"
+            "es2020"
         ],
         "declaration": true,
-        "module": "es2022",
-        "moduleResolution": "node",
+        "module": "node16",
+        "moduleResolution": "node16",
         "target": "es2022",
         "strict": true,
         "esModuleInterop": true,
