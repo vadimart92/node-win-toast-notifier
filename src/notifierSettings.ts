@@ -3,5 +3,5 @@ export interface NotifierSettings {
     ip?: string;
     port?: number;
     api_key?: string;
-    connectToExistingService: boolean
+    connectToExistingService: boolean;
 }

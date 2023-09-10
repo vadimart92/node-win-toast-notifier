@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`builder tests when actions specified 1`] = `
+<toast>
+    <visual>
+        <binding template="ToastGeneric">
+            <text>
+                Hello
+            </text>
+        </binding>
+    </visual>
+    <actions>
+        <input type="text" placeHolderContent="Reply" id="replyId"></input>
+        <input type="selection" id="vars" defaultInput="yep">
+            <selection id="yep" content="Yes"></selection>
+            <selection id="no" content="Nope"></selection>
+        </input>
+        <action content="Some button" arguments="someButtonClicked"></action>
+        <action content="Send" arguments="sendReply" hint-inputId="replyId"></action>
+    </actions>
+</toast>
+`;
+
+exports[`builder tests when audio specified 1`] = `
+<toast>
+    <audio src="ms-winsoundevent:Notification.SMS"></audio>
+    <visual>
+        <binding template="ToastGeneric">
+            <text>
+                Hello
+            </text>
+        </binding>
+    </visual>
+</toast>
+`;
+
+exports[`builder tests when body is object 1`] = `
+<toast>
+    <visual>
+        <binding template="ToastGeneric">
+            <text>
+                Test header
+            </text>
+            <text placement="attribution">
+                Test attribution
+            </text>
+            <image src="my-img" placement="appLogoOverride" hint-crop="circle" alt="Logo"></image>
+            <image src="my-img-2"></image>
+        </binding>
+    </visual>
+</toast>
+`;
+
+exports[`builder tests when body is string 1`] = `
+<toast>
+    <visual>
+        <binding template="ToastGeneric">
+            <text>
+                hello
+            </text>
+        </binding>
+    </visual>
+</toast>
+`;
+
+exports[`builder tests when header specified 1`] = `
+<toast>
+    <header id="test" title="some title" arguments="def args"></header>
+    <visual>
+        <binding template="ToastGeneric">
+            <text>
+                Hello
+            </text>
+        </binding>
+    </visual>
+</toast>
+`;

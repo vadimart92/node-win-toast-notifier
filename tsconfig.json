@@ -1,22 +1,26 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "display": "Node 18",
-    "compilerOptions": {
-        "lib": [
-            "es2020"
-        ],
-        "declaration": true,
-        "module": "node16",
-        "moduleResolution": "node16",
-        "target": "es2022",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "outDir": "lib",
-        "sourceMap": true,
-        "declarationDir": "@types"
-    },
-    "include": ["src/**/*"],
-    "exclude": ["**/*.spec.ts"]
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Node 18",
+  "compilerOptions": {
+    "lib": [
+      "es2020"
+    ],
+    "declaration": true,
+    "module": "node16",
+    "moduleResolution": "node16",
+    "target": "es2022",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "allowJs": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ]
 }
