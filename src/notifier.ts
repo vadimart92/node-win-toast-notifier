@@ -6,6 +6,7 @@ import fetch, { HeadersInit } from 'node-fetch';
 import { StatusMessage } from './statusMessage.js';
 import { NotificationConfig } from './notification-config.js';
 import { buildNotificationXml } from './toastXmlBuilder.js';
+import {fileURLToPath} from "url";
 
 interface NotifierConfig {
     application_id: string;
@@ -20,7 +21,7 @@ interface NotifyResponse {
 
 export class Notifier {
     public static BinaryPath: string = path.resolve(
-        __dirname,
+        path.dirname(fileURLToPath(import.meta.url)),
         '../bin/win-toast-notifier.exe'
     );
     private _process?: ChildProcessWithoutNullStreams;
@@ -123,12 +124,6 @@ export class Notifier {
                             continue;
                         }
                         let statusMessage = JSON.parse(line) as StatusMessage;
-                        if (statusMessage.info?.actions) {
-                            // todo remove on notifier 1.1.2
-                            statusMessage.info.inputs =
-                                statusMessage.info.actions;
-                            delete statusMessage.info?.actions;
-                        }
                         let notification = this._notifications.get(
                             statusMessage.id
                         );
