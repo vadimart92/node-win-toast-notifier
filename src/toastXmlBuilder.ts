@@ -1,6 +1,5 @@
 import {
     NotificationAction,
-    NotificationAudioConfig,
     NotificationBody,
     NotificationConfig,
     NotificationInput,

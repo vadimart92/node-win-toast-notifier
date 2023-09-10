@@ -145,7 +145,7 @@ describe('notifications manual tests', () => {
             }
         );
     });
-    describe('temp', () => {
+    describe('when config provided', () => {
         test('should raise Dismissed event', async () => {
             notificationTemplate = buildNotificationXml({
                 audio: { src: NotificationSounds.IM },
@@ -156,7 +156,7 @@ describe('notifications manual tests', () => {
                     },
                     {
                         type: 'text',
-                        content: 'Hello',
+                        content: 'x',
                         placement: 'attribution',
                     },
                 ],
@@ -199,7 +199,7 @@ describe('notifications manual tests', () => {
             await createNotification('dismiss this');
             const status = await expectStatus(StatusMessageType.Activated);
             expect(status.info?.arguments).toBe('sendReply');
-            expect(status.info?.inputs['replyId']).toBe('Hello');
+            expect(status.info?.inputs['replyId']).toBe('x');
             expect(status.info?.inputs['vars']).toBe('yep');
             await notification.remove();
         });
