@@ -6,3 +6,4 @@ export * from './statusMessageInfo.js';
 export * from './dismissReason.js';
 export * from './squirrel-startup.js';
 export * from './notification-config.js';
+export * from './notifier.js';
