@@ -1,3 +1,7 @@
+![NPM Downloads](https://img.shields.io/npm/dw/node-win-toast-notifier)
+![NPM version](https://img.shields.io/npm/v/node-win-toast-notifier)
+![NPM License](https://img.shields.io/npm/l/node-win-toast-notifier)
+
 # Win-Toast-Notifier Node.js Wrapper
 Node.js wrapper for [win-toast-notifier](https://github.com/vadimart92/win-toast-notifier).
 Allows to interact with user via windows toast notifications.
