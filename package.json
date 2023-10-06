@@ -1,7 +1,8 @@
 {
   "name": "node-win-toast-notifier",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "node wrapper around windows cli tool https://github.com/vadimart92/win-toast-notifier",
+  "keywords": ["windows", "toast", "notification", "native", "xml"],
   "main": "./lib/index.js",
   "type": "module",
   "exports": {
