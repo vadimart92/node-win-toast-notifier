@@ -74,11 +74,18 @@ export type NotificationAudioConfig = {
     src?: NotificationSounds | NotificationLoopingSounds | string;
 };
 
+export type NotificationSettings = {
+    image_cache?: {
+        enable?: true,
+        expiration_timeout_seconds?: number
+    }
+}
 export type NotificationConfig = {
     body: string | NotificationBody;
     actions?: Array<NotificationAction | NotificationInput>;
     audio?: NotificationAudioConfig;
     header?: NotificationHeader;
+    settings?: NotificationSettings
 };
 
 export type NumericId = {

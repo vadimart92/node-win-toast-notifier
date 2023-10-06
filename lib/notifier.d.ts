@@ -1,8 +1,17 @@
 import { Notification } from './notification.js';
 import { NotifierSettings } from './notifierSettings.js';
 import { NotificationConfig } from './notification-config.js';
+export declare const NOTIFIER_OPTIONS: {
+    base_path: string;
+    image_cache: {
+        _folder_path: string;
+        folder_name: string;
+        folder_path: string;
+    };
+};
 export declare class Notifier {
-    static BinaryPath: string;
+    static ExecutableName: string;
+    static get BinaryPath(): string;
     private _process?;
     private _onReady?;
     private readonly _onReadyPromise;
@@ -17,6 +26,7 @@ export declare class Notifier {
     private _subscribeForEvents;
     close(): Promise<void>;
     notify(config: NotificationConfig): Promise<Notification>;
+    _precacheImages(config: NotificationConfig): Promise<NotificationConfig>;
     notifyRaw(xml: string): Promise<Notification>;
     remove(notification: Notification): Promise<void>;
 }
