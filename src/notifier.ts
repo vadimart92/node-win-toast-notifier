@@ -14,10 +14,10 @@ import { downloadFile } from './network-utils.js';
 
 interface NotifierConfig {
     application_id: string;
-    api_key: string;
-    ip: string;
+    api_key?: string;
+    ip?: string;
     port?: number;
-    connectedToExistingService: boolean;
+    connectedToExistingService?: boolean;
 }
 
 interface NotifyResponse {
@@ -29,15 +29,15 @@ export const NOTIFIER_OPTIONS = {
     image_cache: {
         _folder_path: '',
         folder_name: 'image-cache',
-        set folder_path(value: string){
+        set folder_path(value: string) {
             this._folder_path = value;
         },
         get folder_path() {
-            return this._folder_path || path.resolve(
-              NOTIFIER_OPTIONS.base_path,
-              this.folder_name
+            return (
+                this._folder_path ||
+                path.resolve(NOTIFIER_OPTIONS.base_path, this.folder_name)
             );
-        }
+        },
     },
 };
 
@@ -55,7 +55,7 @@ export class Notifier {
     private _onReady?: Function;
     private readonly _onReadyPromise: Promise<void>;
     private _config: NotifierConfig = {
-        api_key: '1',
+        api_key: undefined,
         ip: '127.0.0.1',
         application_id: '',
         connectedToExistingService: false,
@@ -80,37 +80,41 @@ export class Notifier {
             this._onReady?.();
             return;
         }
-        this._startService();
+        this._startService().then(() => {
+            this._onReady?.();
+        });
     }
 
-    private _startService() {
-        let args = [
-            'listen',
-            '-k',
-            this._config.api_key,
-            '-a',
-            this._config.application_id,
-        ];
-        if (this._config.port) {
-            args.push('-p', this._config.port.toString());
-        }
-        this._process = spawn(Notifier.BinaryPath, args);
-        let fullData = '';
-        this._process.stdout.on('data', (data) => {
-            fullData += data;
-            try {
-                this._config = JSON.parse(fullData) as NotifierConfig;
-                console.debug(`CONFIG: ${fullData}`);
-                this._subscribeForEvents();
-                this._onReady?.();
-            } catch (e) {}
-        });
-        this._process.stderr.on('data', (data) => {
-            console.error(`Notifier error: ${data}`);
-        });
-        this._process.on('close', (code) => {
-            if (code !== 0)
-                console.debug(`child process exited with code ${code}`);
+    private _processKilled: boolean = false;
+
+    private async _startService() {
+        return new Promise<void>((resolve) => {
+            let args = ['listen', '-a', this._config.application_id];
+            if (this._config.port) {
+                args.push('-p', this._config.port.toString());
+            }
+            if (this._config.api_key) {
+                args.push('-k', this._config.api_key.toString());
+            }
+            this._process = spawn(Notifier.BinaryPath, args);
+            let fullData = '';
+            this._process.stdout.on('data', (data) => {
+                fullData += data;
+                try {
+                    this._config = JSON.parse(fullData) as NotifierConfig;
+                    console.debug(`CONFIG: ${fullData}`);
+                    this._subscribeForEvents();
+                    resolve();
+                } catch (e) {}
+            });
+            this._process.stderr.on('data', (data) => {
+                console.error(`Notifier error: ${data}`);
+            });
+            this._process.on('close', (code) => {
+                this._processKilled = true;
+                if (code !== 0)
+                    console.debug(`child process exited with code ${code}`);
+            });
         });
     }
 
@@ -120,11 +124,29 @@ export class Notifier {
 
     private _getHeaders(): HeadersInit {
         return {
-            'api-key': this._config.api_key,
+            'api-key': this._config.api_key!,
         };
     }
 
-    private _getUrl(path: string) {
+    private _processIsRunning() {
+        if (!this._process?.pid){
+            return false;
+        }
+        try {
+            process.kill(this._process?.pid, 0);
+            return true;
+        } catch(e) {
+            return false;
+        }
+    }
+    private async _getUrl(path: string) {
+        if (
+            !this._processIsRunning() &&
+            !this._config.connectedToExistingService
+        ) {
+            console.debug('Process not running. Starting...');
+            await this._startService();
+        }
         return `http://${this._config.ip}:${this._config.port}/${path}`;
     }
 
@@ -132,7 +154,9 @@ export class Notifier {
 
     private async _subscribeForEvents() {
         const response = await fetch(
-            this._getUrl(`status-stream?from=${this._lastStatusMessageNumber}`),
+            await this._getUrl(
+                `status-stream?from=${this._lastStatusMessageNumber}`
+            ),
             {
                 headers: this._getHeaders(),
             }
@@ -173,7 +197,7 @@ export class Notifier {
 
     async close() {
         if (!this._config.connectedToExistingService) {
-            const result = await fetch(this._getUrl('quit'), {
+            const result = await fetch(await this._getUrl('quit'), {
                 headers: this._getHeaders(),
             });
             const response = await result.text();
@@ -211,7 +235,7 @@ export class Notifier {
     }
 
     async notifyRaw(xml: string) {
-        let url = this._getUrl('notify');
+        let url = await this._getUrl('notify');
         let config = {
             method: 'POST',
             body: JSON.stringify({
@@ -237,7 +261,7 @@ export class Notifier {
     async remove(notification: Notification) {
         console.debug(`Removing ${notification.id}`);
         let result = await fetch(
-            this._getUrl(`notification?id=${notification.id}`),
+            await this._getUrl(`notification?id=${notification.id}`),
             {
                 headers: this._getHeaders(),
                 method: 'DELETE',

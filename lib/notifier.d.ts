@@ -18,9 +18,11 @@ export declare class Notifier {
     private _config;
     private _notifications;
     constructor(settings: NotifierSettings);
+    private _processKilled;
     private _startService;
     _waitForReady(): Promise<void>;
     private _getHeaders;
+    private _processIsRunning;
     private _getUrl;
     private _lastStatusMessageNumber;
     private _subscribeForEvents;
