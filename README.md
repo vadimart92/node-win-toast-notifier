@@ -1,6 +1,8 @@
-![NPM Downloads](https://img.shields.io/npm/dw/node-win-toast-notifier)
-![NPM version](https://img.shields.io/npm/v/node-win-toast-notifier)
-![NPM License](https://img.shields.io/npm/l/node-win-toast-notifier)
+<a href="https://www.npmjs.com/package/node-win-toast-notifier?activeTab=readme">
+    <img src="https://img.shields.io/npm/dw/node-win-toast-notifier"  alt="downloads count"/>
+    <img src="https://img.shields.io/npm/v/node-win-toast-notifier"  alt="version"/>
+    <img src="https://img.shields.io/npm/l/node-win-toast-notifier"  alt="licence"/>
+</a>
 
 # Win-Toast-Notifier Node.js Wrapper
 Node.js wrapper for [win-toast-notifier](https://github.com/vadimart92/win-toast-notifier).
