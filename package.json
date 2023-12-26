@@ -1,7 +1,7 @@
 {
   "name": "node-win-toast-notifier",
-  "version": "0.1.13",
-  "description": "node wrapper around windows cli tool https://github.com/vadimart92/win-toast-notifier",
+  "version": "0.1.14",
+  "description": "node wrapper around windows cli tool https://github.com/ci-mon/win-toast-notifier",
   "keywords": ["windows", "toast", "notification", "native", "xml"],
   "main": "./lib/index.js",
   "type": "module",
@@ -23,7 +23,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:vadimart92/node-win-toast-notifier.git"
+    "url": "git+ssh://git@github.com:ci-mon/node-win-toast-notifier.git"
   },
   "devDependencies": {
     "@jest/globals": "^29.6.4",
