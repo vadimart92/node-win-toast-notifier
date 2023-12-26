@@ -5,7 +5,7 @@
 </a>
 
 # Win-Toast-Notifier Node.js Wrapper
-Node.js wrapper for [win-toast-notifier](https://github.com/vadimart92/win-toast-notifier).
+Node.js wrapper for [win-toast-notifier](https://github.com/ci-mon/win-toast-notifier).
 Allows to interact with user via windows toast notifications.
 
 ![Complex.jpg](doc/Complex.jpg)
