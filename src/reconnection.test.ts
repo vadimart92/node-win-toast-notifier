@@ -8,15 +8,15 @@ import {
 import { createNotifier } from './createNotifier.js';
 import { StatusMessageType } from './statusMessageType.js';
 import { Notifier } from "./notifier.js";
-import { Notification } from './notification.js';
+import { InternalNotification } from './internalNotification.js';
 import { exec } from 'child_process';
 import { StatusMessage } from './statusMessage.js';
 jest.setTimeout(60000);
 // .\win-toast-notifier.exe register -a "notifier-test"
 describe('notifications manual tests', () => {
   let notifier: Notifier;
-  let notification: Notification;
-  let sysNotification: Notification;
+  let notification: InternalNotification;
+  let sysNotification: InternalNotification;
   let notificationTemplate: string;
   beforeEach(async () => {
     notifier = await createNotifier({

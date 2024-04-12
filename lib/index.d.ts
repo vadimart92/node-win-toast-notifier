@@ -7,4 +7,5 @@ export * from './dismissReason.js';
 export * from './squirrel-startup.js';
 export * from './notification-config.js';
 export * from './notifier.js';
+export * from './notification.js';
 export { registerAppId, unRegisterAppId } from './register-app-id.js';

@@ -1,4 +1,4 @@
-import { Notification } from './notification.js';
+import { InternalNotification } from './internalNotification.js';
 import { NotifierSettings } from './notifierSettings.js';
 import { NotificationConfig } from './notification-config.js';
 export declare const NOTIFIER_OPTIONS: {
@@ -27,8 +27,8 @@ export declare class Notifier {
     private _lastStatusMessageNumber;
     private _subscribeForEvents;
     close(): Promise<void>;
-    notify(config: NotificationConfig): Promise<Notification>;
+    notify(config: NotificationConfig): Promise<InternalNotification>;
     _precacheImages(config: NotificationConfig): Promise<NotificationConfig>;
-    notifyRaw(xml: string): Promise<Notification>;
-    remove(notification: Notification): Promise<void>;
+    notifyRaw(xml: string): Promise<InternalNotification>;
+    remove(notification: InternalNotification): Promise<void>;
 }

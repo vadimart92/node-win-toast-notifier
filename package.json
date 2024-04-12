@@ -1,6 +1,6 @@
 {
   "name": "node-win-toast-notifier",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "node wrapper around windows cli tool https://github.com/ci-mon/win-toast-notifier",
   "keywords": ["windows", "toast", "notification", "native", "xml"],
   "main": "./lib/index.js",
@@ -38,7 +38,7 @@
     "prettier": "^3.0.3"
   },
   "dependencies": {
-    "fast-xml-parser": "^4.2.7",
+    "fast-xml-parser": "^4.3.6",
     "node-fetch": "^3.3.2"
   }
 }

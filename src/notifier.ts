@@ -1,5 +1,5 @@
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
-import { Notification } from './notification.js';
+import { InternalNotification } from './internalNotification.js';
 import { NotifierSettings } from './notifierSettings.js';
 import path from 'path';
 import fetch, { HeadersInit } from 'node-fetch';
@@ -60,9 +60,9 @@ export class Notifier {
         application_id: '',
         connectedToExistingService: false,
     };
-    private _notifications: Map<string, Notification> = new Map<
+    private _notifications: Map<string, InternalNotification> = new Map<
         string,
-        Notification
+        InternalNotification
     >();
 
     constructor(settings: NotifierSettings) {
@@ -181,7 +181,7 @@ export class Notifier {
                             statusMessage.id
                         );
                         if (notification) {
-                            if (notification.statusChanged(statusMessage)) {
+                            if (notification.emitStatusChanged(statusMessage)) {
                                 this._notifications.delete(statusMessage.id);
                             }
                         }
@@ -253,12 +253,12 @@ export class Notifier {
             throw response.statusText;
         }
         let response_json = (await response.json()) as NotifyResponse;
-        let notification = new Notification(this, response_json.id);
+        let notification = new InternalNotification(this, response_json.id);
         this._notifications.set(notification.id, notification);
         return notification;
     }
 
-    async remove(notification: Notification) {
+    async remove(notification: InternalNotification) {
         console.debug(`Removing ${notification.id}`);
         let result = await fetch(
             await this._getUrl(`notification?id=${notification.id}`),
